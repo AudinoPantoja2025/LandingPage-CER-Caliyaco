@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #2b2b2b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Paleta institucional CER Caliyaco */
+  --color-verde: #1e7a46;
+  --color-verde-oscuro: #145a33;
+  --color-verde-claro: #27935a;
+  --color-amarillo: #f4a400;
+  --color-amarillo-hover: #d99000;
+  --color-texto: #2b2b2b;
+  --color-texto-suave: #6b6b6b;
+  --color-sombra: rgba(0, 0, 0, 0.12);
+
+  /* Fuentes */
+  --font-poppins: var(--font-poppins);
+  --font-sans: var(--font-poppins);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  line-height: 1.6;
+}
