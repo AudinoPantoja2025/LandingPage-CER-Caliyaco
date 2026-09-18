@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { bandera, logo } from "@/lib/brand";
 
 export default function Footer() {
