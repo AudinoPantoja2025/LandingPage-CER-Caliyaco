@@ -1,11 +1,11 @@
 import Hero from "@/components/Hero";
-import CreditosProyecto from "@/components/CreditosProyecto";
+import ValoresInstitucionales from "@/components/ValoresInstitucionales";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <CreditosProyecto />
+      <ValoresInstitucionales />
     </>
   );
 }
