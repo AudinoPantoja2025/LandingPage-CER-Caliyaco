@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { bandera, logo } from "@/lib/brand";
 
 const ENLACES = [
-  { ruta: "/", etiqueta: "Inicio" },
+  { ruta: "/#inicio", etiqueta: "Inicio" },
   { ruta: "/nosotros", etiqueta: "Nosotros" },
   { ruta: "/programas", etiqueta: "Programas" },
   { ruta: "/galeria", etiqueta: "Galería" },
@@ -24,17 +24,20 @@ export default function Header() {
   const cerrarMenu = useCallback(() => setMenuAbierto(false), []);
   const alternarMenu = () => setMenuAbierto((prev) => !prev);
 
-  /* Si ya estamos en el home, ir a INICIO hace scroll suave hacia arriba
-     (Next.js no desplaza al navegar a la misma ruta). El retardo permite
-     que el menú móvil se cierre y libere el scroll del body antes de subir. */
-  const irAInicio = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  /* INICIO apunta al fragmento #inicio (sección Hero): el navegador
+     desplaza de forma nativa al cambiar el hash, incluso estando ya en el
+     home. Como respaldo (p. ej. si el hash ya estaba en la URL y no hay
+     cambio que desplazar), se fuerza el scroll al Hero tras cerrar el menú. */
+  const irAInicio = () => {
     cerrarMenu();
-    if (rutaActual === "/") {
-      e.preventDefault();
-      window.setTimeout(() => {
+    window.setTimeout(() => {
+      const inicio = document.getElementById("inicio");
+      if (inicio) {
+        inicio.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 60);
-    }
+      }
+    }, 80);
   };
 
   /* Cerrar con tecla Escape y con clic fuera del menú */
@@ -89,7 +92,7 @@ export default function Header() {
       <div className="max-w-[1200px] h-full mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
         {/* Identidad institucional */}
         <Link
-          href="/"
+          href="/#inicio"
           className="flex items-center gap-2.5 no-underline text-white min-w-0"
           aria-label="CER Caliyaco - Inicio"
           onClick={irAInicio}
@@ -163,12 +166,13 @@ export default function Header() {
         >
           <ul className="flex flex-col lg:flex-row lg:items-center gap-1 list-none m-0 p-0">
             {ENLACES.map((enlace) => {
-              const activo = rutaActual === enlace.ruta;
+              const esInicio = enlace.ruta === "/#inicio";
+              const activo = esInicio ? rutaActual === "/" : rutaActual === enlace.ruta;
               return (
                 <li key={enlace.ruta}>
                   <Link
                     href={enlace.ruta}
-                    onClick={enlace.ruta === "/" ? irAInicio : cerrarMenu}
+                    onClick={enlace.ruta === "/#inicio" ? irAInicio : cerrarMenu}
                     aria-current={activo ? "true" : undefined}
                     className={`relative block lg:inline-block py-3.5 lg:py-2 px-3 text-white/92 lg:text-white/92
                       font-medium text-[0.95rem] lg:text-[0.95rem] rounded-md
