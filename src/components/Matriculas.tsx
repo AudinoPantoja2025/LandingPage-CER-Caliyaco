@@ -5,7 +5,7 @@ export default function Matriculas() {
         <h2 className="text-3xl md:text-4xl text-verde-oscuro font-bold mb-4 relative pb-3
           after:absolute after:left-0 after:bottom-0 after:w-[60px] after:h-1
           after:bg-amarillo after:rounded-full">
-          Matrículas 2026
+          Matrículas
         </h2>
         <p className="text-texto-suave max-w-[700px]">
           Inscripciones abiertas. Acércate a la sede y asegura el cupo de tu

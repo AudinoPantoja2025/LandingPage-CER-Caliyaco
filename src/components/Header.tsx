@@ -25,12 +25,15 @@ export default function Header() {
   const alternarMenu = () => setMenuAbierto((prev) => !prev);
 
   /* Si ya estamos en el home, ir a INICIO hace scroll suave hacia arriba
-     (Next.js no desplaza al navegar a la misma ruta) */
+     (Next.js no desplaza al navegar a la misma ruta). El retardo permite
+     que el menú móvil se cierre y libere el scroll del body antes de subir. */
   const irAInicio = (e: React.MouseEvent<HTMLAnchorElement>) => {
     cerrarMenu();
     if (rutaActual === "/") {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 60);
     }
   };
 
@@ -202,7 +205,7 @@ export default function Header() {
               transition-transform duration-300 hover:-translate-y-0.5
               hover:shadow-[0_4px_14px_rgba(244,164,0,0.5)]"
           >
-            Matrículas 2026
+            Matrículas
           </Link>
         </nav>
       </div>
