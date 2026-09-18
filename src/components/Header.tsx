@@ -24,6 +24,16 @@ export default function Header() {
   const cerrarMenu = useCallback(() => setMenuAbierto(false), []);
   const alternarMenu = () => setMenuAbierto((prev) => !prev);
 
+  /* Si ya estamos en el home, ir a INICIO hace scroll suave hacia arriba
+     (Next.js no desplaza al navegar a la misma ruta) */
+  const irAInicio = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    cerrarMenu();
+    if (rutaActual === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   /* Cerrar con tecla Escape y con clic fuera del menú */
   useEffect(() => {
     if (!menuAbierto) return;
@@ -79,7 +89,7 @@ export default function Header() {
           href="/"
           className="flex items-center gap-2.5 no-underline text-white min-w-0"
           aria-label="CER Caliyaco - Inicio"
-          onClick={cerrarMenu}
+          onClick={irAInicio}
         >
           <Image
             src={logo}
@@ -155,7 +165,7 @@ export default function Header() {
                 <li key={enlace.ruta}>
                   <Link
                     href={enlace.ruta}
-                    onClick={cerrarMenu}
+                    onClick={enlace.ruta === "/" ? irAInicio : cerrarMenu}
                     aria-current={activo ? "true" : undefined}
                     className={`relative block lg:inline-block py-3.5 lg:py-2 px-3 text-white/92 lg:text-white/92
                       font-medium text-[0.95rem] lg:text-[0.95rem] rounded-md
