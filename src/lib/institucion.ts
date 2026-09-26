@@ -55,8 +55,8 @@ export const FILOSOFIA =
   "Educar para la vida: formar personas con sensibilidad social y respeto por los derechos humanos, en un ambiente de tolerancia, afecto, empatía, confianza e inclusión.";
 
 export const CONTACTO = {
-  direccion: "Vereda Caliyaco, Mocoa – Putumayo, Colombia",
+  direccion: "Vereda San José del Pepino, Mocoa – Putumayo, Colombia",
   telefono: "3144434111",
   correo: "caliyaco@sedputumayo.gov.co",
-  director: "Esp. Segundo Raúl Escobar Ramírez",
+  director: "Esp. Gloria del Pilar Burbano Zambrano",
 } as const;

@@ -1,14 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { locationSlides } from "@/lib/locations";
+import { SEDES_GALERIA } from "@/lib/galeria";
+
+/** Una foto destacada por sede (las 4 primeras sedes). */
+const FOTOS_PREVIEW = SEDES_GALERIA.slice(0, 4).map((sede) => ({
+  ...sede.fotos[0],
+  sede: sede.nombre,
+  slug: sede.slug,
+}));
 
 /**
- * Vista previa de la galería con las fotos disponibles en public/locations.
- * Para agregar más fotos, súbelas a public/locations y añádelas al arreglo
- * locationSlides en src/lib/locations.ts; aparecerán aquí automáticamente.
+ * Vista previa de la galería en el inicio.
+ * Toma automáticamente la primera foto de cada sede.
  */
-const FOTOS_PREVIEW = locationSlides.slice(0, 4);
-
 export default function GaleriaPreview() {
   return (
     <section
@@ -30,19 +34,25 @@ export default function GaleriaPreview() {
         </p>
 
         <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4 list-none m-0 p-0">
-          {FOTOS_PREVIEW.map((foto, i) => (
+          {FOTOS_PREVIEW.map((foto) => (
             <li
               key={foto.src}
-              className="relative h-48 md:h-56 overflow-hidden rounded-xl group"
+              className="relative h-48 md:h-56 overflow-hidden rounded-xl group bg-gray-100"
             >
               <Image
                 src={foto.src}
                 alt={foto.alt}
                 fill
                 sizes="(max-width: 1024px) 50vw, 25vw"
-                loading={i === 0 ? "eager" : "lazy"}
+                loading="lazy"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
+              <span
+                className="absolute inset-x-0 bottom-0 px-3 py-2 text-xs font-medium text-white
+                  bg-gradient-to-t from-black/70 to-transparent"
+              >
+                {foto.sede}
+              </span>
             </li>
           ))}
         </ul>
