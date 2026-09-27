@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { SEDES_GALERIA, TOTAL_FOTOS } from "@/lib/galeria";
+import { SEDES_GALERIA } from "@/lib/galeria";
+import Lightbox from "@/components/Lightbox";
 
 const FILTRO_TODAS = "todas";
 
@@ -12,6 +13,12 @@ const FILTRO_TODAS = "todas";
  */
 export default function Galeria() {
   const [filtro, setFiltro] = useState<string>(FILTRO_TODAS);
+  const [ampliada, setAmpliada] = useState<number | null>(null);
+
+  const cambiarFiltro = (nuevo: string) => {
+    setFiltro(nuevo);
+    setAmpliada(null);
+  };
 
   const fotos = useMemo(() => {
     if (filtro === FILTRO_TODAS) {
@@ -36,7 +43,7 @@ export default function Galeria() {
         </h2>
         <p className="text-texto-suave max-w-[700px] mb-8">
           Explora los momentos más significativos de nuestra comunidad
-          educativa: {TOTAL_FOTOS} fotos de las {SEDES_GALERIA.length} sedes.
+          educativa.
         </p>
 
         {/* Filtro por sede */}
@@ -47,7 +54,7 @@ export default function Galeria() {
         >
           <button
             type="button"
-            onClick={() => setFiltro(FILTRO_TODAS)}
+            onClick={() => cambiarFiltro(FILTRO_TODAS)}
             aria-pressed={filtro === FILTRO_TODAS}
             className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors
               focus-visible:outline-2 focus-visible:outline-verde ${
@@ -62,7 +69,7 @@ export default function Galeria() {
             <button
               key={sede.slug}
               type="button"
-              onClick={() => setFiltro(sede.slug)}
+              onClick={() => cambiarFiltro(sede.slug)}
               aria-pressed={filtro === sede.slug}
               className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors
                 focus-visible:outline-2 focus-visible:outline-verde ${
@@ -81,29 +88,48 @@ export default function Galeria() {
           aria-live="polite"
           className="grid grid-cols-2 lg:grid-cols-3 gap-4 list-none m-0 p-0"
         >
-          {fotos.map((foto) => (
+          {fotos.map((foto, i) => (
             <li
               key={foto.src}
               className="relative h-48 md:h-64 overflow-hidden rounded-xl group bg-gray-100"
             >
-              <Image
-                src={foto.src}
-                alt={foto.alt}
-                fill
-                sizes="(max-width: 1024px) 50vw, 33vw"
-                loading="lazy"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              <button
+                type="button"
+                onClick={() => setAmpliada(i)}
+                aria-label={`Ampliar foto de ${foto.sede}: ${foto.alt}`}
+                className="block h-full w-full cursor-zoom-in
+                  focus-visible:outline-2 focus-visible:outline-verde focus-visible:outline-offset-2 rounded-xl"
+              >
+                <Image
+                  src={foto.src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </button>
               <span
+                aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 px-3 py-2 text-xs font-medium text-white
-                  bg-gradient-to-t from-black/70 to-transparent
-                  opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+                  bg-gradient-to-t from-black/70 to-transparent pointer-events-none
+                  opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 {foto.sede}
               </span>
             </li>
           ))}
         </ul>
+
+        {/* Visor en pantalla completa */}
+        {ampliada !== null && fotos[ampliada] && (
+          <Lightbox
+            fotos={fotos}
+            indice={ampliada}
+            onCerrar={() => setAmpliada(null)}
+            onCambiar={setAmpliada}
+          />
+        )}
       </div>
     </section>
   );

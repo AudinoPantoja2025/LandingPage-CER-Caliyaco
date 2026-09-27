@@ -46,7 +46,7 @@ export const SEDES_GALERIA: SedeGaleria[] = [
   },
   {
     slug: "libano-villa-rosa",
-    nombre: "Líbano – Villa Rosa",
+    nombre: "Líbano y Villa Rosa",
     fotos: fotosDe("libano-villa-rosa", "Sede Líbano Villa Rosa", 7),
   },
   {

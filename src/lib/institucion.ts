@@ -1,6 +1,6 @@
 /**
  * Datos institucionales oficiales del CER Caliyaco.
- * Fuente: Manual de Convivencia Escolar 2025 (Mocoa, Putumayo).
+ * Fuente: Manual de Convivencia Escolar 2026 (Mocoa, Putumayo).
  *
  * TODO(datos): confirmar número total de estudiantes, docentes y año de
  * fundación para ampliar la franja de cifras del inicio.
@@ -27,17 +27,17 @@ export const NIVELES: Nivel[] = [
   {
     nombre: "Preescolar",
     jornada: "Jornada mañana",
-    horario: "7:30 a. m. – 12:30 p. m.",
+    horario: "7:30 a. m. – 11:30 p. m.",
   },
   {
     nombre: "Básica Primaria",
     jornada: "Jornada mañana",
-    horario: "7:30 a. m. – 1:30 p. m.",
+    horario: "7:30 a. m. – 12:30 p. m.",
   },
   {
     nombre: "Básica Secundaria",
     jornada: "Jornada única",
-    horario: "6:30 a. m. – 1:25 p. m.",
+    horario: "6:30 a. m. – 1:30 p. m.",
   },
 ];
 

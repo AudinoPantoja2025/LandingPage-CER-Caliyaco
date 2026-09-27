@@ -23,7 +23,7 @@ export default function ProgramasDestacados() {
         </h2>
         <p className="text-texto-suave max-w-[700px] mb-10">
           Énfasis en {ENFASIS}. Horarios oficiales según el Manual de
-          Convivencia 2025.
+          Convivencia 2026.
         </p>
 
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 list-none m-0 p-0">
