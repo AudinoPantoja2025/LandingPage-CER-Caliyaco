@@ -9,7 +9,7 @@ import { bandera, logo } from "@/lib/brand";
 const ENLACES = [
   { ruta: "/#inicio", etiqueta: "Inicio" },
   { ruta: "/nosotros", etiqueta: "Nosotros" },
-  { ruta: "/programas", etiqueta: "Programas" },
+  { ruta: "/niveles-de-ensenanza", etiqueta: "Niveles de enseñanza" },
   { ruta: "/galeria", etiqueta: "Galería" },
   { ruta: "/contacto", etiqueta: "Contacto" },
 ] as const;
