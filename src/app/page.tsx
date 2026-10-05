@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
 import CifrasInstitucionales from "@/components/CifrasInstitucionales";
-import ValoresInstitucionales from "@/components/ValoresInstitucionales";
 import MisionVision from "@/components/MisionVision";
 import ProgramasDestacados from "@/components/ProgramasDestacados";
 import GaleriaPreview from "@/components/GaleriaPreview";
@@ -13,7 +12,6 @@ export default function Home() {
     <>
       <Hero />
       <CifrasInstitucionales />
-      <ValoresInstitucionales />
       <MisionVision />
       <ProgramasDestacados />
       <GaleriaPreview />
