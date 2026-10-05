@@ -37,6 +37,10 @@ yarn-error.log*
 # vercel
 /.vercel/
 
+# Fotos de uniformes pendientes de aprobación (no commitear aún).
+# Quitar esta regla cuando se autorice su publicación.
+/public/uniformes/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
