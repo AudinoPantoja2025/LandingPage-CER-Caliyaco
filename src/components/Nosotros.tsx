@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { bandera, logo } from "@/lib/brand";
+import Principios from "@/components/Principios";
+import Perfiles from "@/components/Perfiles";
 import {
   IDENTIFICACION,
   MISION,
@@ -359,6 +361,33 @@ export default function Nosotros() {
               Ver información de contacto
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── PRINCIPIOS & PERFILES ── */}
+      <section
+        aria-labelledby="principios-titulo"
+        className="py-16 px-6 bg-gray-50"
+      >
+        <div className="max-w-[900px] mx-auto w-full">
+          <SectionHeading id="principios-titulo">
+            Principios y perfiles
+          </SectionHeading>
+          <Principios />
+          <Perfiles />
+
+          <p className="mt-10 rounded-xl bg-verde/5 border border-verde/20 p-5 text-texto-suave leading-relaxed">
+            La convivencia se sostiene en derechos y deberes claros para cada
+            estamento.{" "}
+            <Link
+              href="/convivencia"
+              className="text-verde font-semibold underline underline-offset-4
+                hover:text-verde-oscuro transition-colors
+                focus-visible:outline-2 focus-visible:outline-verde rounded-sm"
+            >
+              Ver derechos y deberes
+            </Link>
+          </p>
         </div>
       </section>
     </div>

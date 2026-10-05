@@ -1,5 +1,13 @@
 import Matriculas from "@/components/Matriculas";
+import Uniformes from "@/components/Uniformes";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function MatriculasPage() {
-  return <Matriculas />;
+  return (
+    <>
+      <ScrollToTop />
+      <Matriculas />
+      <Uniformes />
+    </>
+  );
 }
