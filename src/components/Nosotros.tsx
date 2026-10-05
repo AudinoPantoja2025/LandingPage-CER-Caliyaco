@@ -1,3 +1,5 @@
+import Principios from "@/components/Principios";
+
 export default function Nosotros() {
   return (
     <section id="nosotros" className="py-20 px-6">
@@ -48,6 +50,8 @@ export default function Nosotros() {
             </p>
           </article>
         </div>
+
+        <Principios />
       </div>
     </section>
   );
