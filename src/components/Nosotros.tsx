@@ -111,7 +111,7 @@ const DATOS_IDENTIFICACION = [
 
 export default function Nosotros() {
   return (
-    <main id="nosotros">
+    <div id="nosotros">
       {/* ── PAGE HEADER ── */}
       <section
         aria-labelledby="nosotros-titulo"
@@ -361,6 +361,6 @@ export default function Nosotros() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

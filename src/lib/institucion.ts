@@ -23,11 +23,14 @@ export const SEDES = [
   "San José del Pepino",
 ] as const;
 
+/**
+ * Niveles de enseñanza con su jornada y horario de referencia.
+ */
 export const NIVELES: Nivel[] = [
   {
     nombre: "Preescolar",
     jornada: "Jornada mañana",
-    horario: "7:30 a. m. – 11:30 p. m.",
+    horario: "7:30 a. m. – 11:30 a. m.",
   },
   {
     nombre: "Básica Primaria",
