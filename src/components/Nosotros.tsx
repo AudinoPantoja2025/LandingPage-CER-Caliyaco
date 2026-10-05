@@ -1,4 +1,5 @@
 import Principios from "@/components/Principios";
+import Perfiles from "@/components/Perfiles";
 
 export default function Nosotros() {
   return (
@@ -52,6 +53,7 @@ export default function Nosotros() {
         </div>
 
         <Principios />
+        <Perfiles />
       </div>
     </section>
   );
