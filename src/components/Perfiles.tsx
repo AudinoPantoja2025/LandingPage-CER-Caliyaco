@@ -120,7 +120,7 @@ export default function Perfiles() {
               {perfil.titulo}
             </h4>
             <p className="text-sm text-texto-suave mb-4">{perfil.intro}</p>
-            <ul className="space-y-2.5 mt-auto">
+            <ul className="space-y-2.5">
               {perfil.rasgos.map((rasgo) => (
                 <li key={rasgo} className="flex items-start gap-2.5 text-sm text-texto leading-relaxed">
                   <span
