@@ -121,6 +121,15 @@ export default function Uniformes() {
             </li>
           ))}
         </ul>
+
+        <p className="mt-8 rounded-xl bg-verde/5 border border-verde/20 p-5 text-sm text-texto-suave leading-relaxed">
+          <strong className="text-verde-oscuro">Parágrafo.</strong> El uso del
+          uniforme respeta las condiciones físicas, médicas, psicológicas o
+          emocionales de los estudiantes. En casos debidamente sustentados, la
+          institución puede autorizar ajustes razonables, garantizando
+          bienestar, autoestima e inclusión, sin discriminación ni afectación
+          del proceso formativo.
+        </p>
       </div>
     </section>
   );
