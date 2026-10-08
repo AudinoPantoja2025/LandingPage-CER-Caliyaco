@@ -11,6 +11,7 @@ import {
   VALORES_INSTITUCIONALES,
   SEDES,
 } from "@/lib/institucion";
+import { slugDeSede } from "@/lib/galeria";
 
 /* ── Inline SVG icon helper ── */
 function IconoBase({ children }: { children: React.ReactNode }) {
@@ -334,17 +335,28 @@ export default function Nosotros() {
       >
         <div className="max-w-[900px] mx-auto w-full">
           <SectionHeading id="sedes-titulo">Nuestras sedes</SectionHeading>
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 list-none m-0 p-0 mt-8">
-            {SEDES.map((sede) => (
-              <li
-                key={sede}
-                className="bg-gray-50 rounded-xl border border-black/5 px-4 py-3
-                  text-sm font-medium text-verde-oscuro text-center
-                  transition-colors duration-200 hover:bg-verde/5 hover:border-verde/20"
-              >
-                {sede}
-              </li>
-            ))}
+          <p className="text-sm text-texto-suave mt-4">
+            Pulsa una sede para ver sus fotos en la galería.
+          </p>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 list-none m-0 p-0 mt-4">
+            {SEDES.map((sede) => {
+              const slug = slugDeSede(sede);
+              return (
+                <li key={sede}>
+                  <Link
+                    href={slug ? `/galeria?sede=${slug}` : "/galeria"}
+                    aria-label={`Ver fotos de ${sede} en la galería`}
+                    className="block bg-gray-50 rounded-xl border border-black/5 px-4 py-3
+                      text-sm font-medium text-verde-oscuro text-center no-underline
+                      transition-all duration-200 hover:bg-verde hover:text-white
+                      hover:-translate-y-0.5 hover:shadow-md
+                      focus-visible:outline-2 focus-visible:outline-verde"
+                  >
+                    {sede}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <p className="mt-6 text-sm text-texto-suave leading-relaxed max-w-[600px]">
             Para conocer la ubicación, los niveles y los grados disponibles en cada

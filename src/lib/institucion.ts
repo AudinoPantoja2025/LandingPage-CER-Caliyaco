@@ -60,7 +60,7 @@ export const FILOSOFIA =
 /** Datos de identificación institucional. Fuente: Manual de Convivencia 2025. */
 export const IDENTIFICACION = {
   nombre: "Centro Educativo Rural Caliyaco",
-  ubicacion: "Mocoa, Putumayo, Colombia",
+  ubicacion: "Vereda San José del Pepino, Mocoa, Putumayo, Colombia",
   naturaleza: "Pública",
   caracter: "Mixto",
   enfasis: ENFASIS,

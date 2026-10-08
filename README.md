@@ -49,19 +49,21 @@ npm run start
 
 | Ruta | Contenido |
 | --- | --- |
-| `/` | Hero con carrusel, cifras, valores, identidad, programas, galería, matrículas, anuncios y ubicación. |
-| `/nosotros` | Misión y visión del Centro Educativo Rural Caliyaco. |
-| `/programas` | Programas académicos ofrecidos por la institución. |
-| `/galeria` | Galería fotográfica con filtro por sede y visor en pantalla completa. |
-| `/matriculas` | Información sobre matrículas. |
-| `/contacto` | Teléfono, correo y ubicación institucional. |
+| `/` | Hero con carrusel, cifras, identidad, programas, galería, matrículas, anuncios y ubicación. |
+| `/nosotros` | Identificación, misión, visión, filosofía, valores, propuesta, símbolos, sedes, principios y perfiles. |
+| `/niveles-de-ensenanza` | Niveles de enseñanza (antes `/programas`, con redirección permanente). |
+| `/galeria` | Galería fotográfica con filtro por sede (`?sede=<slug>`) y visor en pantalla completa. |
+| `/matriculas` | Pasos, documentos, preguntas frecuentes, uniformes y requisitos. |
+| `/convivencia` | Derechos y deberes por estamento en acordeones. |
+| `/contacto` | Teléfono, correo, ubicación y canales institucionales. |
 
 ## Funcionalidades
 
 - **Header institucional**: logotipo, navegación por rutas, botón de Matrículas y menú móvil lateral. El enlace INICIO y el logotipo llevan al fragmento `#inicio` (sección Hero).
 - **Hero con carrusel**: fotos de la sede como fondo con fundido cruzado, autoplay de 6 s (respeta `prefers-reduced-motion`), flechas, puntos indicadores y navegación por teclado.
-- **Valores institucionales**: los 8 valores oficiales en tarjetas con iconografía y grilla responsive (1/2/3/4 columnas).
+- **Nosotros**: identificación, misión, visión, filosofía, 8 valores con iconografía, propuesta educativa, símbolos, sedes (enlazan a la galería filtrada), principios y perfiles de la comunidad.
 - **Secciones del inicio**: cifras, identidad (misión/visión/filosofía), programas destacados con horarios, vista previa de galería, banner de matrículas, anuncios y ubicación con mapa.
+- **Matrículas**: pasos del proceso, documentos, preguntas frecuentes, uniformes reglamentarios y requisitos oficiales.
 - **Galería por sedes**: 45 fotos de 7 sedes con filtro, carga diferida y lightbox (anterior/siguiente, teclado Esc/←/→, contador y cierre al pulsar fuera).
 - **Diseño responsive**: mobile-first con puntos de corte en 640 px, 900/1024 px y escritorio.
 
@@ -73,7 +75,8 @@ Las imágenes optimizadas viven en `public/`:
 public/
 ├── brand/            # logo.png (escudo) y bandera.png
 ├── hero/             # fondos del carrusel (WebP, máx. 1920 px)
-└── galeria/<sede>/   # fotos por sede (WebP, máx. 1280 px, NN.webp)
+├── galeria/<sede>/   # fotos por sede (WebP, máx. 1280 px, NN.webp)
+└── uniformes/        # fotos de uniformes (PENDIENTES de aprobación, ignoradas en .gitignore)
 ```
 
 Flujo para agregar o reemplazar fotos:
@@ -87,7 +90,7 @@ Los textos alternativos se generan desde el nombre de la sede en `src/lib/galeri
 
 ## Datos institucionales
 
-Los datos editables están centralizados en `src/lib/institucion.ts`: sedes, niveles con jornadas y horarios, énfasis, misión, visión, filosofía y contacto. Los anuncios del inicio se gestionan en el arreglo `ANUNCIOS` de `src/components/Anuncios.tsx`.
+Los datos editables están centralizados en `src/lib/`: `institucion.ts` (identificación, sedes, niveles con jornadas y horarios, énfasis, misión, visión, filosofía, valores y contacto), `galeria.ts` (fotos por sede), `matriculas.ts` (pasos, documentos y FAQ), `niveles.ts` y `convivencia.ts` (derechos y deberes). Los anuncios del inicio se gestionan en el arreglo `ANUNCIOS` de `src/components/Anuncios.tsx`.
 
 ## Estructura principal
 
@@ -98,15 +101,17 @@ src/
 │   ├── layout.tsx
 │   ├── globals.css
 │   ├── contacto/page.tsx
+│   ├── convivencia/page.tsx
 │   ├── galeria/page.tsx
 │   ├── matriculas/page.tsx
-│   ├── nosotros/page.tsx
-│   └── programas/page.tsx
+│   ├── niveles-de-ensenanza/page.tsx
+│   └── nosotros/page.tsx
 ├── components/
 │   ├── Anuncios.tsx
 │   ├── BannerMatriculas.tsx
 │   ├── CifrasInstitucionales.tsx
 │   ├── Contacto.tsx
+│   ├── Convivencia.tsx
 │   ├── Footer.tsx
 │   ├── Galeria.tsx
 │   ├── GaleriaPreview.tsx
@@ -116,25 +121,31 @@ src/
 │   ├── Lightbox.tsx
 │   ├── Matriculas.tsx
 │   ├── MisionVision.tsx
+│   ├── NivelesEnsenanza.tsx
 │   ├── Nosotros.tsx
-│   ├── Programas.tsx
+│   ├── Perfiles.tsx
+│   ├── Principios.tsx
 │   ├── ProgramasDestacados.tsx
+│   ├── ScrollToTop.tsx
 │   ├── UbicacionContacto.tsx
-│   └── ValoresInstitucionales.tsx
+│   └── Uniformes.tsx
 ├── hooks/
 │   └── useScrollSpy.ts
 └── lib/
     ├── brand.ts
+    ├── convivencia.ts
     ├── galeria.ts
     ├── institucion.ts
-    └── locations.ts
+    ├── locations.ts
+    ├── matriculas.ts
+    └── niveles.ts
 ```
 
 ## Flujo de ramas
 
-- `master`: producción (solo recibe merges).
-- `develop`: integración (base de las ramas de trabajo).
-- `feature/*`: trabajo por funcionalidad, con Pull Request hacia `develop`.
+- `master`: producción (solo recibe merges vía Pull Request).
+- `feat/*` y `feature/*`: trabajo por funcionalidad, con Pull Request hacia `master`.
+- Cada PR fusionado puede borrar su rama para mantener el repositorio limpio.
 
 ## Despliegue
 

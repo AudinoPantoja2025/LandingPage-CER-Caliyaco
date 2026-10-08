@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { bandera, logo } from "@/lib/brand";
 import HeroCarousel from "@/components/HeroCarousel";
 
 export default function Hero() {
