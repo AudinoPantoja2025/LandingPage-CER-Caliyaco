@@ -70,3 +70,26 @@ export const TOTAL_FOTOS = SEDES_GALERIA.reduce(
   (acc, sede) => acc + sede.fotos.length,
   0
 );
+
+/**
+ * Nombres oficiales de sedes (lib/institucion.ts) hacia el slug de galería.
+ * Villa Rosa y Líbano comparten grupo fotográfico.
+ */
+const SLUG_POR_SEDE: Record<string, string> = {
+  Caliyaco: "caliyaco",
+  "San Luis de Chontayaco": "san-luis-de-chontayaco",
+  "Villa Rosa": "libano-villa-rosa",
+  "Líbano": "libano-villa-rosa",
+  "Paraíso": "paraiso",
+  Villanueva: "villanueva",
+  Guaduales: "guaduales",
+  "San José del Pepino": "san-jose-del-pepino",
+};
+
+export function slugDeSede(nombre: string): string | null {
+  return SLUG_POR_SEDE[nombre] ?? null;
+}
+
+export function esSlugValido(slug: string | null): slug is string {
+  return slug !== null && SEDES_GALERIA.some((sede) => sede.slug === slug);
+}

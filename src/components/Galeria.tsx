@@ -1,18 +1,24 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import Image from "next/image";
-import { SEDES_GALERIA } from "@/lib/galeria";
+import { useSearchParams } from "next/navigation";
+import { SEDES_GALERIA, esSlugValido } from "@/lib/galeria";
 import Lightbox from "@/components/Lightbox";
 
 const FILTRO_TODAS = "todas";
 
 /**
- * Galería completa con filtro por sede. Las fotos se cargan de forma
- * diferida (lazy) para no saturar la velocidad de la página.
+ * Galería completa con filtro por sede. Acepta ?sede=<slug> para abrir
+ * directamente en una sede (p. ej. desde la página Nosotros). Las fotos se
+ * cargan de forma diferida (lazy) para no saturar la velocidad de la página.
  */
-export default function Galeria() {
-  const [filtro, setFiltro] = useState<string>(FILTRO_TODAS);
+function GaleriaContenido() {
+  const params = useSearchParams();
+  const inicial = params.get("sede");
+  const [filtro, setFiltro] = useState<string>(() =>
+    esSlugValido(inicial) ? inicial : FILTRO_TODAS
+  );
   const [ampliada, setAmpliada] = useState<number | null>(null);
 
   const cambiarFiltro = (nuevo: string) => {
@@ -132,5 +138,19 @@ export default function Galeria() {
         )}
       </div>
     </section>
+  );
+}
+
+export default function Galeria() {
+  return (
+    <Suspense
+      fallback={
+        <section aria-label="Cargando galería" className="py-20 px-6">
+          <p className="text-texto-suave text-center">Cargando galería…</p>
+        </section>
+      }
+    >
+      <GaleriaContenido />
+    </Suspense>
   );
 }
