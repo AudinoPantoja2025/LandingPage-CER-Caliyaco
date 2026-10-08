@@ -194,12 +194,6 @@ export default function Header() {
             })}
           </ul>
 
-          <Image
-            src={bandera}
-            alt="Bandera institucional del CER Caliyaco"
-            className="hidden lg:block h-14 w-auto object-contain drop-shadow-sm"
-          />
-
           {/* Botón de acción (CTA) */}
           <Link
             href="/matriculas"
@@ -211,6 +205,13 @@ export default function Header() {
           >
             Matrículas
           </Link>
+          
+          <Image
+            src={bandera}
+            alt="Bandera institucional del CER Caliyaco"
+            className="hidden lg:block h-14 w-auto object-contain drop-shadow-sm"
+          />
+
         </nav>
       </div>
     </header>
