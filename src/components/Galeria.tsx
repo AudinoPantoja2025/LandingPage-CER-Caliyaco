@@ -143,85 +143,96 @@ function TarjetaCategoria({
 }
 
 /**
- * Portada de la galería: encabezado editorial, las dos categorías principales
+ * Portada de la galería: encabezado de página, las dos categorías principales
  * (Sedes educativas y Cultura y deporte) y un bloque institucional de cierre.
  */
 export default function Galeria() {
   return (
-    <section
-      id="galeria"
-      aria-labelledby="titulo-galeria"
-      className="pt-28 md:pt-32 pb-20 px-6 bg-white"
-    >
-      <div className="max-w-[1100px] mx-auto w-full">
-        {/* ── PAGE HEADER ── */}
-        <h1
-          id="titulo-galeria"
-          className="text-3xl md:text-4xl text-verde-oscuro font-bold mb-4 relative pb-3
-            after:absolute after:left-0 after:bottom-0 after:w-[60px] after:h-1
-            after:bg-amarillo after:rounded-full"
-        >
-          Galería
-        </h1>
-        <p className="text-texto-suave max-w-[700px] mb-10 md:mb-12">
-          Explora nuestras sedes, experiencias, cultura y deporte. Descubre los
-          espacios y momentos que forman parte de nuestra comunidad educativa.
-        </p>
-
-        {/* ── CATEGORÍAS ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {CATEGORIAS_GALERIA.map((categoria, i) => (
-            <TarjetaCategoria
-              key={categoria.identificador}
-              categoria={categoria}
-              prioritaria={i === 0}
-              retardoMs={i * 100}
-            />
-          ))}
-        </div>
-
-        {/* ── BLOQUE INSTITUCIONAL ── */}
-        <section
-          aria-labelledby="titulo-comunidad"
-          className="relative overflow-hidden mt-10 md:mt-12
-            rounded-2xl border border-black/5 bg-gray-50 px-6 py-7 md:px-8 md:py-8"
-        >
-          {/* Acento institucional lateral */}
-          <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-verde" />
-
-          {/* Detalle decorativo de naturaleza (SVG inline, sin recursos nuevos) */}
-          <svg
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-6 -right-4 h-32 w-32 text-verde/10"
+    <div id="galeria">
+      {/* ── PAGE HEADER (mismo tratamiento que las demás páginas internas) ── */}
+      <section
+        aria-labelledby="titulo-galeria"
+        className="py-20 px-6 bg-verde-oscuro text-white"
+      >
+        <div className="max-w-[900px] mx-auto w-full">
+          <h1
+            id="titulo-galeria"
+            className="text-3xl md:text-5xl font-bold leading-tight mb-4 mt-8 text-balance"
           >
-            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-          </svg>
+            Galería
+          </h1>
+          <p className="text-white/80 text-lg font-medium max-w-[720px] leading-relaxed">
+            Explora nuestras sedes, experiencias, cultura y deporte. Descubre los
+            espacios y momentos que forman parte de nuestra comunidad educativa.
+          </p>
+        </div>
+      </section>
 
-          <div className="relative flex items-start gap-4 md:gap-5">
-            <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full
-                bg-verde/10 text-verde md:h-11 md:w-11"
-            >
-              <IconoHoja />
-            </span>
-            <div>
-              <h2
-                id="titulo-comunidad"
-                className="text-lg md:text-xl font-semibold text-verde-oscuro mb-2"
-              >
-                Una comunidad que aprende, comparte y crece
-              </h2>
-              <p className="text-texto-suave leading-relaxed max-w-[62ch]">
-                En el CER Caliyaco creemos en el poder de la educación para
-                transformar vidas y construir un mejor futuro, en armonía con
-                nuestra naturaleza.
-              </p>
-            </div>
+      {/* ── CATEGORÍAS ── */}
+      <section
+        aria-label="Categorías de la galería"
+        className="py-16 px-6 bg-white"
+      >
+        <div className="max-w-[1100px] mx-auto w-full">
+          {/*
+            TODO(navegación): las vistas internas de cada categoría todavía no
+            existen. Cuando se implementen, se envuelve cada tarjeta en un
+            `next/link` y se trasladan allí los efectos `group-hover`.
+          */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {CATEGORIAS_GALERIA.map((categoria, i) => (
+              <TarjetaCategoria
+                key={categoria.identificador}
+                categoria={categoria}
+                prioritaria={i === 0}
+                retardoMs={i * 100}
+              />
+            ))}
           </div>
-        </section>
-      </div>
-    </section>
+
+          {/* ── BLOQUE INSTITUCIONAL ── */}
+          <section
+            aria-labelledby="titulo-comunidad"
+            className="relative overflow-hidden mt-10 md:mt-12
+              rounded-2xl border border-black/5 bg-gray-50 px-6 py-7 md:px-8 md:py-8"
+          >
+            {/* Acento institucional lateral */}
+            <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-verde" />
+
+            {/* Detalle decorativo de naturaleza (SVG inline, sin recursos nuevos) */}
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-6 -right-4 h-32 w-32 text-verde/10"
+            >
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+            </svg>
+
+            <div className="relative flex items-start gap-4 md:gap-5">
+              <span
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full
+                  bg-verde/10 text-verde md:h-11 md:w-11"
+              >
+                <IconoHoja />
+              </span>
+              <div>
+                <h2
+                  id="titulo-comunidad"
+                  className="text-lg md:text-xl font-semibold text-verde-oscuro mb-2"
+                >
+                  Una comunidad que aprende, comparte y crece
+                </h2>
+                <p className="text-texto-suave leading-relaxed max-w-[62ch]">
+                  En el CER Caliyaco creemos en el poder de la educación para
+                  transformar vidas y construir un mejor futuro, en armonía con
+                  nuestra naturaleza.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
   );
 }
