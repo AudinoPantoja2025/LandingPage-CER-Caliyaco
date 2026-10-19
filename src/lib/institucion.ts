@@ -65,7 +65,6 @@ export const IDENTIFICACION = {
   caracter: "Mixto",
   enfasis: ENFASIS,
   creacion: "Decreto No. 0233 del 17 de febrero de 2003",
-  codigoDANE: "286001001800",
   lema: LEMA,
 } as const;
 
