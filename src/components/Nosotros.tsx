@@ -155,10 +155,11 @@ export default function Nosotros() {
             Datos institucionales
           </SectionHeading>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none m-0 p-0 mt-8">
-            {DATOS_IDENTIFICACION.map((dato) => (
+            {DATOS_IDENTIFICACION.map((dato, i) => (
               <li
                 key={dato.etiqueta}
-                className="bg-gray-50 rounded-xl border border-black/5 px-5 py-4"
+                className={`bg-gray-50 rounded-xl border border-black/5 px-5 py-4
+                  ${i === DATOS_IDENTIFICACION.length - 1 ? "sm:col-span-2" : ""}`}
               >
                 <span className="block text-xs font-semibold uppercase tracking-wider text-verde mb-1">
                   {dato.etiqueta}
@@ -166,15 +167,6 @@ export default function Nosotros() {
                 <span className="text-texto font-medium">{dato.valor}</span>
               </li>
             ))}
-            {/* DANE code in secondary prominence */}
-            <li className="bg-gray-50 rounded-xl border border-black/5 px-5 py-4 sm:col-span-2">
-              <span className="block text-xs font-semibold uppercase tracking-wider text-texto-suave mb-1">
-                Código DANE
-              </span>
-              <span className="text-texto-suave font-medium font-mono">
-                {IDENTIFICACION.codigoDANE}
-              </span>
-            </li>
           </ul>
         </div>
       </section>
