@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { CATEGORIAS_GALERIA, type CategoriaGaleria } from "@/lib/galeria";
+import { IconoFlecha } from "./GaleriaIconos";
 
 /* ── Inline SVG icon helper ── */
 function IconoBase({ children }: { children: React.ReactNode }) {
@@ -30,26 +32,6 @@ function IconoHoja() {
   );
 }
 
-/* ── Arrow icon, used in the "Explorar" action ── */
-function IconoFlecha() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="18"
-      height="18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  );
-}
-
 interface TarjetaCategoriaProps {
   categoria: CategoriaGaleria;
   /** La primera fotografía se carga con prioridad: es la más cercana al viewport. */
@@ -69,76 +51,83 @@ function TarjetaCategoria({
   retardoMs,
 }: TarjetaCategoriaProps) {
   return (
-    <article
-      className="group relative overflow-hidden rounded-2xl bg-verde-oscuro
-        aspect-[3/4] md:aspect-[3/2] lg:aspect-[4/5]"
+    <Link
+      href={categoria.href}
+      aria-label={`Explorar ${categoria.titulo}`}
+      className="group block rounded-2xl
+        focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-verde"
     >
-      <Image
-        src={categoria.imagen.src}
-        alt={categoria.imagen.alt}
-        fill
-        sizes="(max-width: 1023px) 100vw, 50vw"
-        priority={prioritaria}
-        style={{ objectPosition: categoria.encuadre }}
-        className="object-cover transition-transform duration-700 ease-out
-          group-hover:scale-[1.04]
-          motion-reduce:transform-none motion-reduce:transition-none"
-      />
-
-      {/* Superposición institucional: solo la franja inferior, para no oscurecer
-          la fotografía más de lo necesario. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t
-          from-verde-oscuro via-verde-oscuro/85 to-transparent"
-      />
-
-      {/* La animación de entrada se aplica al texto, no a la imagen, para no
-          retrasar la pintura de la fotografía (candidata a LCP). */}
-      <div
-        style={{ animationDelay: `${retardoMs}ms` }}
-        className="relative flex h-full flex-col justify-end gap-3 p-6 md:p-7 lg:p-8
-          animate-[aparecer-sutil_0.55s_ease-out_both] motion-reduce:animate-none"
+      <article
+        className="relative overflow-hidden rounded-2xl bg-verde-oscuro
+          aspect-[3/4] md:aspect-[3/2] lg:aspect-[4/5]"
       >
-        <span
-          className="inline-flex w-fit items-center rounded-full border border-white/25
-            bg-white/15 px-3.5 py-1 text-[0.7rem] font-semibold uppercase
-            tracking-[0.14em] text-white"
+        <Image
+          src={categoria.imagen.src}
+          alt={categoria.imagen.alt}
+          fill
+          sizes="(max-width: 1023px) 100vw, 50vw"
+          priority={prioritaria}
+          style={{ objectPosition: categoria.encuadre }}
+          className="object-cover transition-transform duration-700 ease-out
+            group-hover:scale-[1.04]
+            motion-reduce:transform-none motion-reduce:transition-none"
+        />
+
+        {/* Superposición institucional: solo la franja inferior, para no oscurecer
+            la fotografía más de lo necesario. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t
+            from-verde-oscuro via-verde-oscuro/85 to-transparent"
+        />
+
+        {/* La animación de entrada se aplica al texto, no a la imagen, para no
+            retrasar la pintura de la fotografía (candidata a LCP). */}
+        <div
+          style={{ animationDelay: `${retardoMs}ms` }}
+          className="relative flex h-full flex-col justify-end gap-3 p-6 md:p-7 lg:p-8
+            animate-[aparecer-sutil_0.55s_ease-out_both] motion-reduce:animate-none"
         >
-          {categoria.identificador}
-        </span>
-
-        <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white">
-          {categoria.titulo}
-        </h2>
-
-        <p className="max-w-[46ch] text-sm leading-relaxed text-white/85 md:text-base">
-          {categoria.descripcion}
-        </p>
-
-        {/* Acción visual preparada. El subrayado y la flecha en amarillo son el
-            acento institucional; el texto va en blanco por contraste sobre la
-            fotografía (mismo tratamiento que la navegación del header). */}
-        <span
-          className="relative mt-1 inline-flex w-fit items-center gap-2 pb-1
-            text-sm font-semibold text-white
-            after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full
-            after:origin-left after:scale-x-0 after:rounded-full after:bg-amarillo
-            after:transition-transform after:duration-300
-            group-hover:after:scale-x-100
-            motion-reduce:after:transition-none"
-        >
-          Explorar
           <span
-            className="text-amarillo transition-transform duration-300
-              group-hover:translate-x-1
-              motion-reduce:transform-none motion-reduce:transition-none"
+            className="inline-flex w-fit items-center rounded-full border border-white/25
+              bg-white/15 px-3.5 py-1 text-[0.7rem] font-semibold uppercase
+              tracking-[0.14em] text-white"
           >
-            <IconoFlecha />
+            {categoria.identificador}
           </span>
-        </span>
-      </div>
-    </article>
+
+          <h2 className="text-2xl md:text-3xl font-bold leading-tight text-white">
+            {categoria.titulo}
+          </h2>
+
+          <p className="max-w-[46ch] text-sm leading-relaxed text-white/85 md:text-base">
+            {categoria.descripcion}
+          </p>
+
+          {/* Acción visual preparada. El subrayado y la flecha en amarillo son el
+              acento institucional; el texto va en blanco por contraste sobre la
+              fotografía (mismo tratamiento que la navegación del header). */}
+          <span
+            className="relative mt-1 inline-flex w-fit items-center gap-2 pb-1
+              text-sm font-semibold text-white
+              after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full
+              after:origin-left after:scale-x-0 after:rounded-full after:bg-amarillo
+              after:transition-transform after:duration-300
+              group-hover:after:scale-x-100
+              motion-reduce:after:transition-none"
+          >
+            Explorar
+            <span
+              className="text-amarillo transition-transform duration-300
+                group-hover:translate-x-1
+                motion-reduce:transform-none motion-reduce:transition-none"
+            >
+              <IconoFlecha size={18} />
+            </span>
+          </span>
+        </div>
+      </article>
+    </Link>
   );
 }
 
@@ -174,11 +163,6 @@ export default function Galeria() {
         className="py-16 px-6 bg-white"
       >
         <div className="max-w-[1100px] mx-auto w-full">
-          {/*
-            TODO(navegación): las vistas internas de cada categoría todavía no
-            existen. Cuando se implementen, se envuelve cada tarjeta en un
-            `next/link` y se trasladan allí los efectos `group-hover`.
-          */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {CATEGORIAS_GALERIA.map((categoria, i) => (
               <TarjetaCategoria
