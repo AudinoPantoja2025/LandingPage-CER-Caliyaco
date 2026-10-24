@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   authors: [{ name: "Centro Educativo Rural Caliyaco" }],
   robots: { index: true, follow: true },
+  verification: {
+    google: "H-AH7RlIvMf3BCnCtblxXcs_DvhWm038dwbWf6OMOU4",
+  },
 };
 
 export default function RootLayout({
