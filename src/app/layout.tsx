@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -11,10 +13,16 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "CER Caliyaco | Centro Educativo Rural",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "CER Caliyaco | Centro Educativo Rural en Mocoa, Putumayo",
+    template: "%s | CER Caliyaco",
+  },
   description:
-    "Centro Educativo Rural Caliyaco - Educación con calidad para construir futuro.",
+    "Centro Educativo Rural Caliyaco: educación pública con énfasis en Ciencias Naturales en 8 sedes rurales de Mocoa, Putumayo. Preescolar, básica primaria y secundaria.",
+  applicationName: SITE_NAME,
   authors: [{ name: "Centro Educativo Rural Caliyaco" }],
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -23,8 +31,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${poppins.variable} h-full antialiased`}>
+    <html lang="es-CO" className={`${poppins.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-texto">
+        <JsonLd />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
