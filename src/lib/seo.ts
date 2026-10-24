@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 /**
  * Constantes SEO del sitio.
- * Dominio principal de producción (verificado en Vercel; el dominio
- * anterior redirige 307 preservando rutas).
+ * Dominio principal de producción (verificado en Vercel; los dominios
+ * anteriores redirigen 307 preservando rutas).
  */
-export const SITE_URL = "https://centro-rural-caliyaco.vercel.app";
+export const SITE_URL = "https://centro-educativo-rural-caliyaco.vercel.app";
 export const SITE_NAME = "CER Caliyaco";
 
 /**
