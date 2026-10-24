@@ -46,7 +46,7 @@ export default function ProgramasDestacados() {
 
         <p className="mt-8">
           <Link
-            href="/programas"
+            href="/niveles-de-ensenanza"
             className="inline-block px-8 py-3 font-semibold text-base no-underline
               bg-verde text-white rounded-full transition-transform duration-300
               hover:-translate-y-[3px] hover:shadow-lg
