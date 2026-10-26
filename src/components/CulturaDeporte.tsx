@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   CATEGORIAS_CULTURA_DEPORTE,
   type CategoriaCultural,
@@ -69,14 +70,18 @@ interface TarjetaCategoriaCulturalProps {
 
 /**
  * Tarjeta de gran formato para una categoría cultural o deportiva.
- * Sin fotografías: la identidad se construye con la paleta institucional, el
- * icono local y un patrón discreto, nunca con imágenes simuladas.
+ * Si la categoría tiene `imagen`, se usa una fotografía real con la misma
+ * superposición institucional de la tarjeta de /galeria (franja inferior con
+ * degradado verde para la lectura del texto). Sin imagen, la identidad se
+ * construye con la paleta institucional, el icono local y un patrón discreto,
+ * nunca con imágenes simuladas.
  */
 function TarjetaCategoriaCultural({
   categoria,
 }: TarjetaCategoriaCulturalProps) {
   const esCultura = categoria.slug === "cultura";
   const Icono = esCultura ? IconoCultura : IconoDeporte;
+  const tieneImagen = Boolean(categoria.imagen);
 
   return (
     <Link
@@ -89,12 +94,35 @@ function TarjetaCategoriaCultural({
           esCultura ? "bg-verde-oscuro" : "bg-verde"
         }`}
     >
-      {esCultura ? <PatronCultura /> : <PatronDeporte />}
+      {categoria.imagen && (
+        <>
+          <Image
+            src={categoria.imagen.src}
+            alt={categoria.imagen.alt}
+            fill
+            sizes="(max-width: 1023px) 100vw, 50vw"
+            style={{ objectPosition: categoria.encuadre }}
+            className="object-cover transition-transform duration-700 ease-out
+              group-hover:scale-[1.04]
+              motion-reduce:transform-none motion-reduce:transition-none"
+          />
+
+          {/* Superposición institucional: solo la franja inferior, igual que
+              la tarjeta de /galeria, para no oscurecer toda la fotografía. */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t
+              from-verde-oscuro via-verde-oscuro/85 to-transparent"
+          />
+        </>
+      )}
+
+      {!tieneImagen && (esCultura ? <PatronCultura /> : <PatronDeporte />)}
 
       <span
         aria-hidden="true"
-        className="relative flex h-12 w-12 items-center justify-center rounded-full
-          border border-white/20 bg-white/10"
+        className={`relative flex h-12 w-12 items-center justify-center rounded-full
+          ${tieneImagen ? "border-white/25 bg-verde-oscuro/60" : "border border-white/20 bg-white/10"}`}
       >
         <Icono size={26} />
       </span>
@@ -131,7 +159,8 @@ function TarjetaCategoriaCultural({
 
 /**
  * Vista «Cultura y deporte»: encabezado propio, selector activo y exactamente
- * dos tarjetas. No se inventan fotografías ni eventos.
+ * dos tarjetas. Cultura usa su fotografía real del encuentro; Deporte se
+ * mantiene con el patrón decorativo hasta contar con imágenes propias.
  */
 export default function CulturaDeporte() {
   return (
