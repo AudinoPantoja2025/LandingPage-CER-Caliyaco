@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import CategoriaCulturaDeporte from "@/components/CategoriaCulturaDeporte";
+import CulturaEncuentro from "@/components/CulturaEncuentro";
 import {
   CATEGORIAS_CULTURA_DEPORTE,
   esCategoriaCultural,
@@ -30,6 +31,12 @@ export default async function CategoriaPage({ params }: CategoriaPageProps) {
 
   if (!datos) {
     notFound();
+  }
+
+  // Cultura cuenta con una colección fotográfica real y una vista editorial
+  // propia. Deporte conserva el detalle genérico y su estado vacío.
+  if (datos.slug === "cultura" && datos.evento) {
+    return <CulturaEncuentro categoria={datos} evento={datos.evento} />;
   }
 
   return <CategoriaCulturaDeporte categoria={datos} />;
