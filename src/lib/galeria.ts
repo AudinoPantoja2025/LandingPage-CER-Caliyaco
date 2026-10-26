@@ -156,8 +156,7 @@ export const CATEGORIAS_NAVEGACION_GALERIA = [
  * Portada de la galería: las dos categorías principales.
  *
  * Los textos y las rutas de imagen se centralizan aquí para que su
- * actualización manual (sobre todo la fotografía de "Cultura y deporte",
- * que es provisional) se haga en un solo sitio.
+ * actualización manual se haga en un solo sitio.
  * ──────────────────────────────────────────────────────────────── */
 
 export interface CategoriaGaleria {
@@ -201,14 +200,13 @@ export const CATEGORIAS_GALERIA: CategoriaGaleria[] = [
       "Celebramos las expresiones culturales, las actividades deportivas y los encuentros que fortalecen los lazos de nuestra comunidad.",
     href: "/galeria/cultura-y-deporte",
     imagen: {
-      // PROVISIONAL: el proyecto todavía no tiene fotografías de eventos
-      // culturales o deportivos. Este mural costumbrista es la imagen
-      // disponible que mejor evoca la categoría. Reemplázala (src y alt)
-      // cuando existan fotos propias de las actividades.
-      src: "/galeria/libano-villa-rosa/04.webp",
-      alt: "Mural pintado en el muro de una sede del Centro Educativo Rural Caliyaco con escenas costumbristas y de la comunidad",
+      // Fotografía real del «Encuentro de expresiones culturales». Los
+      // estudiantes quedan centrados, así que el recorte vertical de la
+      // tarjeta conserva los sujetos y el color sigue legible.
+      src: "/galeria/cultura/07.webp",
+      alt: "Estudiantes con vestidos coloridos tomados de la mano durante el encuentro cultural del CER Caliyaco",
     },
-    encuadre: "88% center",
+    encuadre: "center",
   },
 ];
 
