@@ -44,3 +44,4 @@ next-env.d.ts
 # codegraph
 /.codegraph
 /.atl
+/.playwright-mcp

@@ -336,7 +336,11 @@ export default function Nosotros() {
               return (
                 <li key={sede}>
                   <Link
-                    href={slug ? `/galeria?sede=${slug}` : "/galeria"}
+                    href={
+                      slug
+                        ? `/galeria/sedes-educativas/${slug}`
+                        : "/galeria/sedes-educativas"
+                    }
                     aria-label={`Ver fotos de ${sede} en la galería`}
                     className="block bg-gray-50 rounded-xl border border-black/5 px-4 py-3
                       text-sm font-medium text-verde-oscuro text-center no-underline
