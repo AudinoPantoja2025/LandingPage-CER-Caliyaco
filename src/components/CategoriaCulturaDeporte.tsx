@@ -15,9 +15,10 @@ interface CategoriaCulturaDeporteProps {
 /**
  * Detalle de una categoría de «Cultura y deporte».
  *
- * La estructura ya está preparada para recibir fotografías reales: si
- * `categoria.fotos` deja de estar vacío, se renderiza `GaleriaFotosVisor`; hoy
- * muestra un estado vacío intencional, sin cargas simuladas ni formularios.
+ * Lo usa la categoría Deporte, que aún no tiene fotografías reales y muestra
+ * el estado vacío intencional, sin cargas simuladas ni formularios. Cultura
+ * tiene su propia vista editorial en `CulturaEncuentro`. La rama con
+ * `GaleriaFotosVisor` queda disponible por si otra categoría recibe fotos.
  */
 export default function CategoriaCulturaDeporte({
   categoria,
