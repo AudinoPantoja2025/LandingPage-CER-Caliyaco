@@ -225,6 +225,7 @@ export default function CulturaGaleria({
           indice={indice}
           onCerrar={cerrar}
           onCambiar={setIndice}
+          mostrarLeyenda={false}
         />
       )}
     </>
