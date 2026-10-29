@@ -17,6 +17,7 @@ interface LightboxProps {
   indice: number;
   onCerrar: () => void;
   onCambiar: (indice: number) => void;
+  mostrarLeyenda?: boolean;
 }
 
 /**
@@ -31,6 +32,7 @@ export default function Lightbox({
   indice,
   onCerrar,
   onCambiar,
+  mostrarLeyenda = true,
 }: LightboxProps) {
   const total = fotos.length;
   const foto = fotos[indice];
@@ -172,8 +174,12 @@ export default function Lightbox({
             priority
           />
         </div>
-        <figcaption className="mt-3 flex items-center justify-between gap-4 text-sm text-white/85">
-          <span className="truncate">{foto.alt}</span>
+        <figcaption
+          className={`mt-3 flex items-center gap-4 text-sm text-white/85 ${
+            mostrarLeyenda ? "justify-between" : "justify-end"
+          }`}
+        >
+          {mostrarLeyenda && <span className="truncate">{foto.alt}</span>}
           <span aria-live="polite" className="shrink-0 tabular-nums">
             {indice + 1} / {total}
           </span>
