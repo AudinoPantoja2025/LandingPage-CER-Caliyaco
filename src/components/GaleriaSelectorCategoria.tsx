@@ -1,13 +1,16 @@
 import Link from "next/link";
-import { CATEGORIAS_NAVEGACION_GALERIA } from "@/lib/galeria";
+import {
+  CATEGORIAS_NAVEGACION_GALERIA,
+  type IdCategoriaGaleria,
+} from "@/lib/galeria";
 
 interface GaleriaSelectorCategoriaProps {
   /** Categoría que corresponde a la página actual. */
-  activa: "sedes" | "cultura-deporte";
+  activa: IdCategoriaGaleria;
 }
 
 /**
- * Selector compacto entre las dos categorías principales de la galería.
+ * Selector compacto entre las categorías principales de la galería.
  * La opción activa se marca visualmente y con `aria-current="page"`.
  */
 export default function GaleriaSelectorCategoria({
@@ -24,7 +27,7 @@ export default function GaleriaSelectorCategoria({
               <Link
                 href={categoria.href}
                 aria-current={esActiva ? "page" : undefined}
-                className={`flex items-center justify-center rounded-full px-4 py-2 text-[0.8rem] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verde sm:text-sm ${
+                className={`flex items-center justify-center whitespace-nowrap rounded-full px-3 py-2 text-[0.75rem] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verde sm:px-4 sm:text-sm ${
                   esActiva
                     ? "bg-verde text-white shadow-sm"
                     : "text-texto-suave hover:bg-white hover:text-verde-oscuro"

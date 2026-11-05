@@ -38,6 +38,8 @@ interface TarjetaCategoriaProps {
   prioritaria: boolean;
   /** Retardo de la animación de entrada, para escalonar las tarjetas. */
   retardoMs: number;
+  /** Clases del contenedor, usadas para ajustar la retícula de la portada. */
+  className?: string;
 }
 
 /**
@@ -49,13 +51,14 @@ function TarjetaCategoria({
   categoria,
   prioritaria,
   retardoMs,
+  className = "",
 }: TarjetaCategoriaProps) {
   return (
     <Link
       href={categoria.href}
       aria-label={`Explorar ${categoria.titulo}`}
-      className="group block rounded-2xl
-        focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-verde"
+      className={`group block rounded-2xl
+        focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-verde ${className}`}
     >
       <article
         className="relative overflow-hidden rounded-2xl bg-verde-oscuro
@@ -65,7 +68,7 @@ function TarjetaCategoria({
           src={categoria.imagen.src}
           alt={categoria.imagen.alt}
           fill
-          sizes="(max-width: 1023px) 100vw, 50vw"
+          sizes="(max-width: 1023px) 100vw, 33vw"
           priority={prioritaria}
           style={{ objectPosition: categoria.encuadre }}
           className="object-cover transition-transform duration-700 ease-out
@@ -132,8 +135,8 @@ function TarjetaCategoria({
 }
 
 /**
- * Portada de la galería: encabezado de página, las dos categorías principales
- * (Sedes educativas y Cultura y deporte) y un bloque institucional de cierre.
+ * Portada de la galería: encabezado de página, las tres categorías principales
+ * (Sedes educativas, Cultura y Eventos) y un bloque institucional de cierre.
  */
 export default function Galeria() {
   return (
@@ -151,8 +154,8 @@ export default function Galeria() {
             Galería
           </h1>
           <p className="text-white/80 text-lg font-medium max-w-[720px] leading-relaxed">
-            Explora nuestras sedes, experiencias, cultura y deporte. Descubre los
-            espacios y momentos que forman parte de nuestra comunidad educativa.
+            Explora nuestras sedes, las expresiones culturales y los eventos que
+            forman parte de nuestra comunidad educativa.
           </p>
         </div>
       </section>
@@ -163,13 +166,18 @@ export default function Galeria() {
         className="py-16 px-6 bg-white"
       >
         <div className="max-w-[1100px] mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {CATEGORIAS_GALERIA.map((categoria, i) => (
               <TarjetaCategoria
                 key={categoria.identificador}
                 categoria={categoria}
                 prioritaria={i === 0}
                 retardoMs={i * 100}
+                className={
+                  i === 2
+                    ? "md:col-span-2 lg:col-span-1"
+                    : ""
+                }
               />
             ))}
           </div>

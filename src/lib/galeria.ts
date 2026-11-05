@@ -78,11 +78,6 @@ export const SEDES_GALERIA: SedeGaleria[] = [
   },
 ];
 
-export const TOTAL_FOTOS = SEDES_GALERIA.reduce(
-  (acc, sede) => acc + sede.fotos.length,
-  0
-);
-
 /* ────────────────────────────────────────────────────────────────
  * Portadas de las sedes para la vista «Sedes educativas».
  * Debe existir una entrada por cada nombre de `SEDES`
@@ -138,7 +133,7 @@ export const SEDE_DESTACADA = "San José del Pepino";
 /** Slugs cuyo grupo fotográfico representa a más de una sede institucional. */
 export const SLUGS_COLECCION_COMPARTIDA = new Set(["libano-villa-rosa"]);
 
-/** Navegación entre las dos categorías principales de la galería. */
+/** Navegación entre las categorías principales de la galería. */
 export const CATEGORIAS_NAVEGACION_GALERIA = [
   {
     id: "sedes",
@@ -146,14 +141,22 @@ export const CATEGORIAS_NAVEGACION_GALERIA = [
     href: "/galeria/sedes-educativas",
   },
   {
-    id: "cultura-deporte",
-    label: "Cultura y deporte",
-    href: "/galeria/cultura-y-deporte",
+    id: "cultura",
+    label: "Cultura",
+    href: "/galeria/cultura",
+  },
+  {
+    id: "eventos",
+    label: "Eventos",
+    href: "/galeria/eventos",
   },
 ] as const;
 
+export type IdCategoriaGaleria =
+  (typeof CATEGORIAS_NAVEGACION_GALERIA)[number]["id"];
+
 /* ────────────────────────────────────────────────────────────────
- * Portada de la galería: las dos categorías principales.
+ * Portada de la galería: las tres categorías principales.
  *
  * Los textos y las rutas de imagen se centralizan aquí para que su
  * actualización manual se haga en un solo sitio.
@@ -194,17 +197,30 @@ export const CATEGORIAS_GALERIA: CategoriaGaleria[] = [
     encuadre: "68% center",
   },
   {
-    identificador: "02 · CULTURA Y DEPORTE",
-    titulo: "Cultura y deporte",
+    identificador: "02 · CULTURA",
+    titulo: "Cultura",
     descripcion:
-      "Celebramos las expresiones culturales, las actividades deportivas y los encuentros que fortalecen los lazos de nuestra comunidad.",
-    href: "/galeria/cultura-y-deporte",
+      "Celebramos las expresiones culturales y los encuentros que fortalecen los lazos de nuestra comunidad.",
+    href: "/galeria/cultura",
     imagen: {
       // Fotografía real del «Encuentro de expresiones culturales». Los
       // estudiantes quedan centrados, así que el recorte vertical de la
       // tarjeta conserva los sujetos y el color sigue legible.
       src: "/galeria/cultura/07.webp",
       alt: "Estudiantes con vestidos coloridos tomados de la mano durante el encuentro cultural del CER Caliyaco",
+    },
+    encuadre: "center",
+  },
+  {
+    identificador: "03 · EVENTOS",
+    titulo: "Eventos",
+    descripcion:
+      "Entregas, encuentros y momentos institucionales que mejoran las condiciones de nuestra comunidad educativa.",
+    href: "/galeria/eventos",
+    imagen: {
+      // Fotografía aérea de la sede con el nuevo restaurante y cocina escolar.
+      src: "/galeria/eventos/01.webp",
+      alt: "Vista aérea de la sede del CER Caliyaco con el nuevo restaurante y cocina escolar",
     },
     encuadre: "center",
   },

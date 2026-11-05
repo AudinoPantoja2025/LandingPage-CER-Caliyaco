@@ -10,18 +10,30 @@ interface GaleriaFotosVisorProps {
   fotos: FotoSede[];
   /** Nombre de la colección, usado por el visor ampliado. */
   titulo: string;
+  /**
+   * Relación de aspecto de cada miniatura como clase Tailwind completa.
+   * Por defecto, horizontal 4:3 (fotografías de sedes).
+   */
+  aspecto?: string;
+  /**
+   * Columnas máximas en pantallas medianas y grandes. Con 2, las miniaturas se
+   * apilan en móvil para que el contenido de piezas gráficas siga legible.
+   */
+  columnas?: 2 | 3;
 }
 
 /**
  * Cuadrícula de fotografías con visor ampliado.
  *
- * Se usa tanto en el detalle de una sede como, cuando existan fotos reales, en
- * las categorías de Cultura y Deporte. Al cerrar el visor, el foco vuelve a la
- * miniatura que lo abrió.
+ * Se usa en el detalle de una sede, en la vista de Eventos y en cualquier
+ * categoría con fotografías. Al cerrar el visor, el foco vuelve a la miniatura
+ * que lo abrió.
  */
 export default function GaleriaFotosVisor({
   fotos,
   titulo,
+  aspecto,
+  columnas = 3,
 }: GaleriaFotosVisorProps) {
   const [indice, setIndice] = useState<number | null>(null);
   const botonesRef = useRef<Array<HTMLButtonElement | null>>([]);
@@ -41,7 +53,11 @@ export default function GaleriaFotosVisor({
     <>
       <ul
         aria-label={`Fotografías de ${titulo}`}
-        className="m-0 grid list-none grid-cols-2 gap-4 p-0 md:grid-cols-3"
+        className={`m-0 grid list-none gap-4 p-0 md:gap-5 ${
+          columnas === 2
+            ? "grid-cols-1 sm:grid-cols-2"
+            : "grid-cols-2 md:grid-cols-3"
+        }`}
       >
         {fotos.map((foto, i) => (
           <li key={foto.src}>
@@ -52,14 +68,20 @@ export default function GaleriaFotosVisor({
               type="button"
               onClick={() => setIndice(i)}
               aria-label={`Ampliar ${foto.alt}`}
-              className="group relative block aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-50
-                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verde"
+              className={`group relative block w-full overflow-hidden rounded-xl bg-gray-50
+                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verde ${
+                  aspecto ?? "aspect-[4/3]"
+                }`}
             >
               <Image
                 src={foto.src}
                 alt={foto.alt}
                 fill
-                sizes="(max-width: 767px) 50vw, 33vw"
+                sizes={
+                  columnas === 2
+                    ? "(max-width: 639px) 100vw, 50vw"
+                    : "(max-width: 767px) 50vw, 33vw"
+                }
                 priority={i === 0}
                 className="object-cover transition-transform duration-500 ease-out
                   group-hover:scale-[1.03]
