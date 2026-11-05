@@ -11,7 +11,11 @@ import {
 import { SEDES } from "@/lib/institucion";
 import GaleriaEncabezado from "./GaleriaEncabezado";
 import GaleriaSelectorCategoria from "./GaleriaSelectorCategoria";
-import { IconoCamara, IconoFlecha } from "./GaleriaIconos";
+import {
+  IconoCamara,
+  IconoFlecha,
+  IconoFlechaIzquierda,
+} from "./GaleriaIconos";
 
 interface TarjetaSede {
   nombre: string;
@@ -176,6 +180,16 @@ export default function SedesEducativas() {
         className="bg-white px-6 py-12 md:py-16"
       >
         <div className="mx-auto w-full max-w-[1100px]">
+          <Link
+            href="/galeria"
+            className="mb-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-verde-oscuro
+              transition-colors hover:text-verde
+              focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verde"
+          >
+            <IconoFlechaIzquierda size={18} />
+            Volver a la galería
+          </Link>
+
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <GaleriaSelectorCategoria activa="sedes" />
             <p className="text-sm font-medium text-texto-suave">

@@ -45,7 +45,6 @@ export const NIVELES: Nivel[] = [
 ];
 
 export const ENFASIS = "Ciencias Naturales y Educación Ambiental";
-export const CALENDARIO = "A";
 export const LEMA = "Naturaleza, ciencia y progreso";
 
 export const MISION =

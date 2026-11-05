@@ -67,39 +67,6 @@ export function IconoCamara(props: IconoProps = {}) {
   );
 }
 
-/** Colección de imágenes. */
-export function IconoGaleria(props: IconoProps = {}) {
-  return (
-    <IconoBase {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <circle cx="9" cy="9" r="2" />
-      <path d="m21 15-3.5-3.5a2 2 0 0 0-2.8 0L6 20" />
-    </IconoBase>
-  );
-}
-
-/** Máscara de teatro: cultura y expresión creativa. */
-export function IconoCultura(props: IconoProps = {}) {
-  return (
-    <IconoBase {...props}>
-      <path d="M3 4h18v6a9 9 0 0 1-18 0V4Z" />
-      <path d="M8 9h.01M16 9h.01" />
-      <path d="M8.5 13a4.5 4.5 0 0 0 7 0" />
-    </IconoBase>
-  );
-}
-
-/** Balón: deporte, movimiento y trabajo en equipo. */
-export function IconoDeporte(props: IconoProps = {}) {
-  return (
-    <IconoBase {...props}>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 7.2 15.6 9.8 14.2 14H9.8L8.4 9.8 12 7.2Z" />
-      <path d="M12 3v4.2M3.7 8.9l4.7.9M6.3 19.2l3.5-5.2M17.7 19.2l-3.5-5.2M20.3 8.9l-4.7.9" />
-    </IconoBase>
-  );
-}
-
 /** Lupa con signo más: ampliar una fotografía. */
 export function IconoAmpliar(props: IconoProps = {}) {
   return (

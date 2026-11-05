@@ -54,11 +54,11 @@ npm run start
 | `/` | Hero con carrusel, cifras, identidad, programas destacados, vista previa de galería, banner de matrículas, anuncios y ubicación. |
 | `/nosotros` | Identificación, misión, visión, filosofía, valores, propuesta educativa, símbolos, sedes, principios y perfiles de la comunidad. |
 | `/niveles-de-ensenanza` | Oferta por nivel, jornadas y horarios oficiales. `/programas` redirige aquí de forma permanente (308). |
-| `/galeria` | Portada de la galería con dos categorías: Sedes educativas y Cultura y deporte. |
+| `/galeria` | Portada de la galería con tres categorías: Sedes educativas, Cultura y Eventos. |
 | `/galeria/sedes-educativas` | Grid editorial de las 8 sedes del CER. |
 | `/galeria/sedes-educativas/[slug]` | Fotos de una sede con visor ampliado. Son 7 slugs: Líbano y Villa Rosa comparten colección fotográfica. |
-| `/galeria/cultura-y-deporte` | Portada de las categorías Cultura y Deporte. |
-| `/galeria/cultura-y-deporte/[categoria]` | Cultura: vista editorial del «Encuentro de expresiones culturales» (9 fotos + visor). Deporte: estado vacío intencional mientras no existan fotos reales. |
+| `/galeria/cultura` | Vista editorial del «Encuentro de expresiones culturales» (9 fotos + visor). |
+| `/galeria/eventos` | Nuevo restaurante y cocina escolar (2 piezas gráficas + visor) con crédito a la Gobernación del Putumayo. |
 | `/matriculas` | Pasos, documentos, preguntas frecuentes, uniformes y requisitos. |
 | `/convivencia` | Derechos y deberes por estamento en acordeones nativos. |
 | `/contacto` | Teléfono, correo, ubicación y canales institucionales. |
@@ -73,7 +73,7 @@ Las rutas dinámicas se construyen en build con `generateStaticParams` y `dynami
 - **Hero con carrusel**: 13 diapositivas (6 de `public/hero` y 7 de la galería) con fundido cruzado, autoplay de 6 s, pausa, flechas, puntos indicadores y navegación por teclado. Respeta `prefers-reduced-motion`.
 - **Nosotros**: identificación, misión, visión, filosofía, 8 valores con iconografía, propuesta educativa, símbolos, sedes (enlazan a su galería), principios y perfiles de la comunidad.
 - **Niveles de enseñanza**: tarjetas por nivel, tabla de jornadas y horarios, y advertencia de que la jornada puede variar según la sede.
-- **Galería**: portada de dos categorías, grid de sedes con tarjeta destacada y vista editorial del encuentro cultural.
+- **Galería**: portada de tres categorías, grid de sedes con tarjeta destacada y vistas editoriales del encuentro cultural y del nuevo restaurante escolar.
 - **Visor de fotos**: lightbox con anterior/siguiente, teclado (`Esc`, `←`, `→`), contador, cierre al pulsar fuera y retorno de foco a la miniatura.
 - **Matrículas**: pasos del proceso, documentos, preguntas frecuentes, uniformes reglamentarios y requisitos oficiales.
 - **Convivencia**: derechos y deberes por estamento con `<details>/<summary>` nativos (sin JavaScript).
@@ -107,7 +107,7 @@ No hay `fetch`, Route Handlers ni Server Actions. Los datos entran por imports e
 `next.config.ts` declara:
 
 - **Cabeceras de seguridad** para todas las rutas: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`.
-- **Redirección permanente** de `/programas` a `/niveles-de-ensenanza`.
+- **Redirecciones permanentes**: `/programas` → `/niveles-de-ensenanza`; la antigua `/galeria/cultura-y-deporte` → `/galeria` y `/galeria/cultura-y-deporte/cultura` → `/galeria/cultura`.
 
 ## Capa de datos (`src/lib`)
 
@@ -115,9 +115,9 @@ Los datos editables están centralizados en `src/lib`:
 
 | Módulo | Contenido |
 | --- | --- |
-| `institucion.ts` | Identificación, `SEDES` (8), `NIVELES` (3) con jornadas y horarios, énfasis, calendario, lema, misión, visión, filosofía, valores y contacto. |
+| `institucion.ts` | Identificación, `SEDES` (8), `NIVELES` (3) con jornadas y horarios, énfasis, lema, misión, visión, filosofía, valores y contacto. |
 | `galeria.ts` | Grupos fotográficos por sede, portadas, sede destacada, categorías de navegación y portada de la galería. |
-| `culturaDeporte.ts` | Categorías Cultura y Deporte, colección del encuentro cultural y textos de estado vacío. |
+| `culturaEventos.ts` | Categorías Cultura y Eventos, colección del encuentro cultural y textos del nuevo restaurante escolar. |
 | `niveles.ts` | Oferta académica por nivel (sin duplicar horarios). |
 | `matriculas.ts` | Pasos, documentos y preguntas frecuentes. |
 | `convivencia.ts` | Grupos de derechos y deberes. |
@@ -186,22 +186,20 @@ src/
 │   │   ├── sedes-educativas/
 │   │   │   ├── page.tsx
 │   │   │   └── [slug]/page.tsx
-│   │   └── cultura-y-deporte/
-│   │       ├── page.tsx
-│   │       └── [categoria]/page.tsx
+│   │   ├── cultura/page.tsx
+│   │   └── eventos/page.tsx
 │   ├── matriculas/page.tsx
 │   ├── niveles-de-ensenanza/page.tsx
 │   └── nosotros/page.tsx
 ├── components/
 │   ├── Anuncios.tsx
 │   ├── BannerMatriculas.tsx
-│   ├── CategoriaCulturaDeporte.tsx
 │   ├── CifrasInstitucionales.tsx
 │   ├── Contacto.tsx
 │   ├── Convivencia.tsx
-│   ├── CulturaDeporte.tsx
 │   ├── CulturaEncuentro.tsx
 │   ├── CulturaGaleria.tsx
+│   ├── EventosGaleria.tsx
 │   ├── Footer.tsx
 │   ├── Galeria.tsx
 │   ├── GaleriaEncabezado.tsx
@@ -226,12 +224,10 @@ src/
 │   ├── SedesEducativas.tsx
 │   ├── UbicacionContacto.tsx
 │   └── Uniformes.tsx
-├── hooks/
-│   └── useScrollSpy.ts
 └── lib/
     ├── brand.ts
     ├── convivencia.ts
-    ├── culturaDeporte.ts
+    ├── culturaEventos.ts
     ├── galeria.ts
     ├── institucion.ts
     ├── locations.ts

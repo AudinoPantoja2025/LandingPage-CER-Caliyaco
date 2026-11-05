@@ -27,6 +27,24 @@ const nextConfig: NextConfig = {
         destination: "/niveles-de-ensenanza",
         permanent: true,
       },
+      // La antigua vista «Cultura y deporte» se dividió en dos categorías
+      // independientes. Se conservan las URL anteriores con redirección
+      // permanente para no perder enlaces ni posicionamiento.
+      {
+        source: "/galeria/cultura-y-deporte",
+        destination: "/galeria",
+        permanent: true,
+      },
+      {
+        source: "/galeria/cultura-y-deporte/cultura",
+        destination: "/galeria/cultura",
+        permanent: true,
+      },
+      {
+        source: "/galeria/cultura-y-deporte/deporte",
+        destination: "/galeria",
+        permanent: true,
+      },
     ];
   },
 };

@@ -1,22 +1,24 @@
 import Link from "next/link";
-import type { CategoriaCultural, EventoCultural } from "@/lib/culturaDeporte";
+import type {
+  CategoriaContenido,
+  EventoContenido,
+} from "@/lib/culturaEventos";
 import CulturaGaleria from "./CulturaGaleria";
 import GaleriaEncabezado from "./GaleriaEncabezado";
 import GaleriaSelectorCategoria from "./GaleriaSelectorCategoria";
 import { IconoFlechaIzquierda } from "./GaleriaIconos";
 
 interface CulturaEncuentroProps {
-  categoria: CategoriaCultural;
-  evento: EventoCultural;
+  categoria: CategoriaContenido;
+  evento: EventoContenido;
 }
 
 /**
  * Vista editorial de la categoría Cultura.
  *
- * Sustituye el estado vacío por la colección real del «Encuentro de
- * expresiones culturales»: encabezado compacto reutilizado, selector de
- * categorías, fotografía destacada y mosaico. La vista de Deporte conserva su
- * propio componente y no depende de esta composición.
+ * Presenta la colección real del «Encuentro de expresiones culturales»:
+ * encabezado compacto reutilizado, selector de categorías, fotografía
+ * destacada y mosaico.
  */
 export default function CulturaEncuentro({
   categoria,
@@ -30,7 +32,6 @@ export default function CulturaEncuentro({
         descripcion={evento.introduccion}
         migas={[
           { label: "Galería", href: "/galeria" },
-          { label: "Cultura y deporte", href: "/galeria/cultura-y-deporte" },
           { label: "Cultura" },
         ]}
       />
@@ -43,18 +44,18 @@ export default function CulturaEncuentro({
           {/* `flex` para que el selector (w-full en móvil, w-auto desde sm)
               se ajuste a su contenido y no ocupe todo el ancho. */}
           <div className="flex">
-            <GaleriaSelectorCategoria activa="cultura-deporte" />
+            <GaleriaSelectorCategoria activa="cultura" />
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <Link
-              href="/galeria/cultura-y-deporte"
+              href="/galeria"
               className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-verde-oscuro
                 transition-colors hover:text-verde
                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verde"
             >
               <IconoFlechaIzquierda size={18} />
-              Volver a Cultura y deporte
+              Volver a la galería
             </Link>
 
             <p className="text-sm font-medium text-texto-suave">
